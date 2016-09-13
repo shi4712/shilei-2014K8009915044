@@ -1,0 +1,38 @@
+package lesson1;
+
+import java.util.Scanner;
+import java.math.BigDecimal;
+
+public class shi1 {
+  public static void main(String[] args){
+	  Scanner input=new Scanner(System.in);
+	  
+	  System.out.println("请输入要分发的红包数目");
+	  int number=input.nextInt();
+	  BigDecimal[] red=new BigDecimal[number];
+	  
+	  System.out.println("请输入要分发的红包金额,精确到两位小数");
+	  BigDecimal money1 = input.nextBigDecimal();
+		
+	  for(int i=0;i<number-1;i++){
+		String string=money1.toString();
+		double money=Double.parseDouble(string);
+		double leastmoney=money-0.01*(number-i);
+		double x=Math.random()*leastmoney+0.01;
+	    BigDecimal redmoney = new BigDecimal(x);
+	    BigDecimal y = new BigDecimal(1);
+	    BigDecimal tureredmoney=redmoney.divide(y,2,BigDecimal.ROUND_HALF_UP);  
+		red[i]=tureredmoney;
+		money1=money1.subtract(tureredmoney);
+	  }
+	    red[number-1]=money1;
+	  
+	  BigDecimal sum = new BigDecimal(0);
+	  for(int i=0;i<number;i++){
+		sum = red[i].add(sum);
+		int j=i+1;
+		System.out.println("第"+j+"个红包金额为"+red[i]+"元");
+	  }
+	  
+  }
+}
